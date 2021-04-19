@@ -16,6 +16,8 @@ public class CalculadoraForm extends javax.swing.JFrame {
     /**
      * Creates new form CalculadoraForm
      */
+    
+    String strResult;
     public CalculadoraForm() {
         initComponents();
     }
@@ -330,8 +332,15 @@ public class CalculadoraForm extends javax.swing.JFrame {
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         JButton btn = (JButton)evt.getSource();
-        String strRes = result.getText() + btn.getText();
-        System.out.println(strRes);
+        System.out.println(result.getText().equals("0"));
+        if(result.getText().equals("0") && result.getText().length()==1){
+            result.setText("");
+        }
+        strResult = result.getText() + btn.getText();
+        result.setText(strResult);
+        if(btn.getText().equals("=")){
+            contar();
+        }
     }//GEN-LAST:event_jButton7MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -352,4 +361,28 @@ public class CalculadoraForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JTextField result;
     // End of variables declaration//GEN-END:variables
+
+    private void contar() {
+        if(strResult.contains("+")){
+            String[] numeros = strResult.split("\\+");
+            
+            numeros[numeros.length-1] = numeros[numeros.length-1].replace("=", "");
+            
+            if(numeros.length >= 2){
+                int res = 0;
+                
+                for(int i=0; i<numeros.length;i++){
+                    res+=Integer.valueOf(numeros[i]);
+                }
+                
+                printResult(res);
+            }else{
+                System.out.println("ERROR");
+            }
+        }
+    }
+
+    private void printResult(int res) {
+        result.setText(String.valueOf(res));
+    }
 }

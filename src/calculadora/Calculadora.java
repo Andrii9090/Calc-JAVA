@@ -17,6 +17,7 @@ public class Calculadora {
     public static void main(String[] args) {
         CalculadoraForm calc = new CalculadoraForm();
         calc.setVisible(true);
+        calc.setTitle("Calculadora");
     }
     
 }
